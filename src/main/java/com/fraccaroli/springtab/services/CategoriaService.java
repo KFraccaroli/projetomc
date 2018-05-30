@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.fraccaroli.springtab.domain.Categoria;
+import com.fraccaroli.springtab.dto.CategoriaDTO;
 import com.fraccaroli.springtab.repositories.CategoriaRepository;
 import com.fraccaroli.springtab.services.exceptions.DataIntegrityException;
 import com.fraccaroli.springtab.services.exceptions.ObjectNotFoundException;
@@ -55,4 +56,9 @@ public class CategoriaService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}
+	
+	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(),objDto.getNome());
+	}	
 }

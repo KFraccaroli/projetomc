@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fraccaroli.springtab.domain.Categoria;
 import com.fraccaroli.springtab.domain.Cliente;
+import com.fraccaroli.springtab.dto.CategoriaDTO;
 import com.fraccaroli.springtab.repositories.ClienteRepository;
 import com.fraccaroli.springtab.services.exceptions.ObjectNotFoundException;
 
@@ -21,4 +22,5 @@ public class ClienteService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 					"Objeto não encontrato! id: " +  id + ", Tipo: " + Cliente.class.getName()));
 	}
+
 }
