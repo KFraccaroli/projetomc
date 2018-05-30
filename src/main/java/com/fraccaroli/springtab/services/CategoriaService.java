@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.fraccaroli.springtab.domain.Categoria;
-import com.fraccaroli.springtab.domain.Cliente;
 import com.fraccaroli.springtab.dto.CategoriaDTO;
 import com.fraccaroli.springtab.repositories.CategoriaRepository;
 import com.fraccaroli.springtab.services.exceptions.DataIntegrityException;
