@@ -3,6 +3,8 @@ package com.fraccaroli.springtab.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -28,6 +30,7 @@ public class CategoriaService {
 					"Objeto não encontrato! id: " +  id + ", Tipo: " + Categoria.class.getName()));
 	}
 	
+	@Transactional
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
 		return repo.save(obj);
