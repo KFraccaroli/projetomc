@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.fraccaroli.springtab.services.DBService;
+import com.fraccaroli.springtab.services.EmailService;
+import com.fraccaroli.springtab.services.MockEmailService;
 
 @Configuration
 @Profile("test")
@@ -22,4 +24,8 @@ public class TestConfig {
 		return true;
 	}
 	
+	@Bean
+	public EmailService emailService() {
+		return new MockEmailService();
+	}
 }
