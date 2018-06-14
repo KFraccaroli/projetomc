@@ -16,11 +16,14 @@ import org.springframework.stereotype.Service;
 import com.fraccaroli.springtab.domain.Cidade;
 import com.fraccaroli.springtab.domain.Cliente;
 import com.fraccaroli.springtab.domain.Endereco;
+import com.fraccaroli.springtab.domain.enums.Perfil;
 import com.fraccaroli.springtab.domain.enums.TipoCliente;
 import com.fraccaroli.springtab.dto.ClienteDTO;
 import com.fraccaroli.springtab.dto.ClienteNewDTO;
 import com.fraccaroli.springtab.repositories.ClienteRepository;
 import com.fraccaroli.springtab.repositories.EnderecoRepository;
+import com.fraccaroli.springtab.security.UserSS;
+import com.fraccaroli.springtab.services.exceptions.AuthorizationException;
 import com.fraccaroli.springtab.services.exceptions.DataIntegrityException;
 import com.fraccaroli.springtab.services.exceptions.ObjectNotFoundException;
 
@@ -37,6 +40,11 @@ public class ClienteService {
 	private BCryptPasswordEncoder pe;
 	
 	public Cliente find(Integer id){
+		UserSS user = UserService.authenticated();
+		if(user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso Negado");
+		}
+		
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 					"Objeto não encontrato! id: " +  id + ", Tipo: " + Cliente.class.getName()));
